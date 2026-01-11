@@ -1,67 +1,68 @@
-# UIGen
+# Flask API
 
-AI-powered React component generator with live preview.
+A simple Flask API with health check and echo endpoints.
 
 ## Prerequisites
 
-- Node.js 18+
-- npm
+- Python 3.7+
+- pip
 
 ## Setup
 
-1. **Optional** Edit `.env` and add your Anthropic API key:
-
-```
-ANTHROPIC_API_KEY=your-api-key-here
-```
-
-The project will run without an API key. Rather than using a LLM to generate components, static code will be returned instead.
-
-2. Install dependencies and initialize database
+1. Install dependencies:
 
 ```bash
-npm run setup
+pip install -r requirements.txt
 ```
-
-This command will:
-
-- Install all dependencies
-- Generate Prisma client
-- Run database migrations
 
 ## Running the Application
 
-### Development
-
 ```bash
-npm run dev
+python app.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+The API will be available at `http://localhost:5000`
 
-## Usage
+## API Endpoints
 
-1. Sign up or continue as anonymous user
-2. Describe the React component you want to create in the chat
-3. View generated components in real-time preview
-4. Switch to Code view to see and edit the generated files
-5. Continue iterating with the AI to refine your components
+### GET /health
 
-## Features
+Health check endpoint that returns the API status.
 
-- AI-powered component generation using Claude
-- Live preview with hot reload
-- Virtual file system (no files written to disk)
-- Syntax highlighting and code editor
-- Component persistence for registered users
-- Export generated code
+**Response:**
+```json
+{
+  "status": "healthy",
+  "message": "API is running"
+}
+```
+
+**Example:**
+```bash
+curl http://localhost:5000/health
+```
+
+### POST /echo
+
+Echo endpoint that returns the data sent in the request body.
+
+**Request Body:** JSON data
+
+**Response:**
+```json
+{
+  "echoed": <your-data>
+}
+```
+
+**Example:**
+```bash
+curl -X POST http://localhost:5000/echo \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello, World!"}'
+```
 
 ## Tech Stack
 
-- Next.js 15 with App Router
-- React 19
-- TypeScript
-- Tailwind CSS v4
-- Prisma with SQLite
-- Anthropic Claude AI
-- Vercel AI SDK
+- Flask 3.0.0
+- Python
